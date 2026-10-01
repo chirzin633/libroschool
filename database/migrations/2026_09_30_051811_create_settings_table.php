@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('key')->unique();
             $table->string('value');
             $table->string('description')->nullable();
-            $table->foreignId('updated_by')->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
 

@@ -30,9 +30,9 @@ return new class extends Migration
             // Index untuk performa pencarian & dashboard
             $table->index('title');
             $table->index('available_stock');
-
-            DB::statement('ALTER TABLE books ADD CONSTRAINT chk_books_stock CHECK (available_stock >= 0 AND available_stock <= stock)');
         });
+
+        DB::statement('ALTER TABLE books ADD CONSTRAINT chk_books_stock CHECK (available_stock >= 0 AND available_stock <= stock)');
     }
 
     /**

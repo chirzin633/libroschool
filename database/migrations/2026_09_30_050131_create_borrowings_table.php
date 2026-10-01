@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('member_id')->constrained()->restrictOnDelete();
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->date('borrowed_at');
-            $table->date('due_date');
+            $table->date('due_at');
             $table->enum('status', ['Borrowed', 'Returned'])->default('Borrowed');
             $table->text('notes')->nullable();
             $table->timestamps();
