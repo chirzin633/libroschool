@@ -29,7 +29,7 @@ class MemberPolicy
 
     public function delete(User $user, Member $member)
     {
-        if ($user->role === UserRole::Pustakawan) {
+        if ($user->role !== UserRole::Pustakawan) {
             return false;
         }
 

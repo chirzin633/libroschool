@@ -19,7 +19,7 @@ class CodeGeneratorService
             DB::statement("SELECT pg_advisory_xact_lock(hashtext(?))", [$lockKey]);
 
             $lastCode = Member::withTrashed()
-                ->where('member_code', 'LIKE', "{$prefix}")
+                ->where('member_code', 'LIKE', "{$prefix}%")
                 ->orderByDesc('member_code')
                 ->value('member_code');
 

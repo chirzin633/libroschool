@@ -5,13 +5,13 @@ namespace App\Enums;
 enum MemberStatus: string
 {
   case Active = 'Active';
-  case Inactice = 'Inactive';
+  case Inactive = 'Inactive';
 
   public function label()
   {
     return match ($this) {
       self::Active => 'Aktif',
-      self::Inactice => 'Non-Aktif'
+      self::Inactive => 'Non-Aktif'
     };
   }
 
@@ -19,7 +19,7 @@ enum MemberStatus: string
   {
     return match ($this) {
       self::Active => 'success',
-      self::Inactice => 'danger'
+      self::Inactive => 'danger'
     };
   }
 
