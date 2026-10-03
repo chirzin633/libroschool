@@ -18,7 +18,7 @@ class ReturnService
     public static function processBatchReturn(int $borrowingId, array $returnsData, int $staffId): Borrowing
     {
         return DB::transaction(function () use ($borrowingId, $returnsData, $staffId) {
-            $borrowing = Borrowing::with('details.book')->findOrFail($borrowingId);
+            $borrowing = Borrowing::with('details.book')->where('id', $borrowingId)->lockForUpdate()->firstOrFail();
 
             if ($borrowing->status === BorrowingStatus::Returned) {
                 throw ValidationException::withMessages([
@@ -47,7 +47,7 @@ class ReturnService
                 if ($condition !== ReturnCondition::Lost) {
                     $dueDate = Carbon::parse($borrowing->due_at);
                     $returnDate = Carbon::parse($today);
-                    $lateDays = max(0, $returnDate->diffInDays($dueDate, false));
+                    $lateDays = max(0, $dueDate->diffInDays($returnDate, false));
                 }
 
                 // Buat record pengembalian

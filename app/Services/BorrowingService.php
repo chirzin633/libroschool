@@ -20,7 +20,7 @@ class BorrowingService
             throw ValidationException::withMessages(['member_id' => "Member '{$member->name}' is not active"]);
         }
 
-        if ($member->fines()->where('status', FineStatus::Unpaid)->exists()) {
+        if ($member->hasUnpaidFines()) {
             throw ValidationException::withMessages(['member_id' => "Member '{$member->name}' has unpaid fines."]);
         }
 
@@ -72,7 +72,7 @@ class BorrowingService
                     ->join('borrowings', 'borrowing_details.borrowing_id', '=', 'borrowings.id')
                     ->where('borrowings.member_id', $member->id)
                     ->where('borrowings.status', BorrowingStatus::Borrowed)
-                    ->where('borrowing.details.book_id', $bookId)
+                    ->where('borrowing_details.book_id', $bookId)
                     ->exists();
 
                 if ($alreadyBorrowed) {

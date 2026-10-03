@@ -48,7 +48,7 @@ class EditBook extends EditRecord
     {
         $adjustment = (int) ($data['stock_adjustment'] ?? 0);
 
-        if (!$adjustment !== 0) {
+        if ($adjustment !== 0) {
             $record = $this->getRecord();
             $data['stock'] = $record->stock + $adjustment;
             $data['available_stock'] = $record->available_stock + $adjustment;

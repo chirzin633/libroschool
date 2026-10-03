@@ -44,18 +44,6 @@ class Member extends Model
         return $this->hasMany(Borrowing::class);
     }
 
-    public function unpaidFines(): HasMany
-    {
-        return $this->hasManyThrough(
-            Fine::class,
-            Borrowing::class,
-            'member_id', // FK di borrowings
-            'book_return_id', // FK di fines (via book_returns)
-            'id', // PK di members
-            'id' // PK di borrowings
-        )->where('fines.status', 'Unpaid');
-    }
-
     /**
      * Cek apakah member memiliki peminjaman aktif (BORROWED)
      * Digunakan untuk proteksi: tidak bisa dinonaktifkan/dihapus jika masih ada pinjaman aktif
