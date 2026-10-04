@@ -35,8 +35,13 @@ class BorrowingsTable
                 TextColumn::make('borrowed_at')
                     ->label('Tanggal Pinjam')
                     ->date('d M Y')
+                    ->sortable(),
+
+                TextColumn::make('due_at')
+                    ->label('Jatuh Tempo')
+                    ->date('d M Y')
                     ->sortable()
-                    ->color(fn(Borrowing $record) => $record->status === BorrowingStatus::Borrowed && now()->gt($record->due_at) ? 'danger' : 'gray'),
+                    ->color(fn(Borrowing $record) => $record->status === BorrowingStatus::Borrowed && now()->gt($record->due_at) ? 'danger' : ''),
 
                 TextColumn::make('status')
                     ->label('Status')

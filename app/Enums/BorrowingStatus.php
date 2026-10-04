@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
-enum BorrowingStatus: string
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum BorrowingStatus: string implements HasLabel, HasColor
 {
   case Borrowed = 'Borrowed';
   case Returned = 'Returned';
@@ -16,6 +19,22 @@ enum BorrowingStatus: string
   }
 
   public function color()
+  {
+    return match ($this) {
+      self::Borrowed => 'primary',
+      self::Returned => 'gray'
+    };
+  }
+
+  public function getLabel(): string
+  {
+    return match ($this) {
+      self::Borrowed => "Sedang Dipinjam",
+      self::Returned => "Telah dikembalikan"
+    };
+  }
+
+  public function getColor(): string|array|null
   {
     return match ($this) {
       self::Borrowed => 'primary',
