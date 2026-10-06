@@ -39,7 +39,8 @@ class ReturnService
                     ]);
                 }
 
-                $condition = ReturnCondition::from($returnInput['condition']);
+                $condition = $returnInput['condition'] instanceof ReturnCondition ? $returnInput['condition'] : ReturnCondition::from($returnInput['condition']);
+
                 $notes = $returnInput['notes'] ?? null;
 
                 // Hitung keterlambatan (LOST = 0 hari terlambat)

@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\Borrowings\Tables;
 
 use App\Enums\BorrowingStatus;
+use App\Filament\Resources\Borrowings\BorrowingResource;
 use App\Models\Borrowing;
+use Filament\Actions\Action;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -63,6 +65,13 @@ class BorrowingsTable
             ])
             ->recordActions([
                 ViewAction::make(),
+
+                Action::make('processReturn')
+                    ->label('Proses Pengembalian')
+                    ->icon('heroicon-o-arrow-uturn-left')
+                    ->color('success')
+                    ->visible(fn(Borrowing $record) => $record->status === BorrowingStatus::Borrowed)
+                    ->url(fn(Borrowing $record) => BorrowingResource::getUrl('process-return', ['record' => $record]))
             ])
             ->defaultSort('borrowed_at', 'desc');
     }

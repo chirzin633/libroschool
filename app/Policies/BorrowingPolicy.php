@@ -13,6 +13,12 @@ class BorrowingPolicy
         return true;
     }
 
+    //Semua role bisa melihat detail peminjama
+    public function view(User $user, Borrowing $borrowing)
+    {
+        return true;
+    }
+
     // Semua role bisa memproses peminjaman
     public function create(User $user)
     {

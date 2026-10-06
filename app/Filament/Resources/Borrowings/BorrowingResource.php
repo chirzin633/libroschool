@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Borrowings;
 use App\Filament\Resources\Borrowings\Pages\CreateBorrowing;
 use App\Filament\Resources\Borrowings\Pages\EditBorrowing;
 use App\Filament\Resources\Borrowings\Pages\ListBorrowings;
+use App\Filament\Resources\Borrowings\Pages\ProcessReturn;
 use App\Filament\Resources\Borrowings\Pages\ViewBorrowing;
 use App\Filament\Resources\Borrowings\Schemas\BorrowingForm;
 use App\Filament\Resources\Borrowings\Tables\BorrowingsTable;
@@ -57,6 +58,7 @@ class BorrowingResource extends Resource
             'create' => CreateBorrowing::route('/create'),
             'edit' => EditBorrowing::route('/{record}/edit'),
             'view' => ViewBorrowing::route('/{record}'),
+            'process-return' => ProcessReturn::route('/{record}/return')
         ];
     }
 }

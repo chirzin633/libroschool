@@ -3,14 +3,15 @@
 namespace App\Filament\Resources\Borrowings\Schemas;
 
 use App\Enums\BorrowingStatus;
-use Carbon\Carbon;
+use App\Filament\Resources\Borrowings\BorrowingResource;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Support\Enums\FontWeight;
 
 class BorrowingViewSchema
 {
@@ -57,6 +58,19 @@ class BorrowingViewSchema
               ->relationship('staff', 'name')
               ->disabled(),
           ]),
+
+        Section::make('Aksi')
+          ->visible(fn($record) => $record->status === BorrowingStatus::Borrowed)
+          ->schema([
+            Actions::make([
+              Action::make('processReturn')
+                ->label('Proses Pengembalian')
+                ->icon('heroicon-o-arrow-uturn-left')
+                ->color('success')
+                ->url(fn($record) => BorrowingResource::getUrl('process-return', ['record' => $record]))
+            ]),
+          ])
+          ->columnSpanFull(),
 
         Section::make('Daftar Buku')
           ->description(fn($record) => "Total {$record->details->count()} buku")
