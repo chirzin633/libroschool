@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <form wire:submit="callMountedAction">
+    <form wire.submit.prevent>
         {{ $this->form }}
     </form>
 </x-filament-panels::page>
