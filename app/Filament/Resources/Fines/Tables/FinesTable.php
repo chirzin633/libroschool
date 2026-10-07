@@ -38,7 +38,7 @@ class FinesTable
                     ->badge()
                     ->color(fn(FineType $state) => match ($state) {
                         FineType::Late => 'warning',
-                        FineType::Damaged => 'orange',
+                        FineType::Damaged => 'danger',
                         FineType::Lost => 'danger'
                     })
                     ->sortable(),
@@ -78,26 +78,37 @@ class FinesTable
                     ->options(FineType::class)
             ])
             ->recordActions([
-                Action::make('pay')
-                    ->label('Bayar')
-                    ->icon('heroicon-o-check-circle')
-                    ->color('success')
-                    ->visible(fn(Fine $record) => $record->status === FineStatus::Unpaid)
-                    ->requiresConfirmation()
-                    ->modalHeading('Konfirmasi Pembayaran')
-                    ->modalDescription(fn(Fine $record) => "Konfirmasi pembayaran denda {$record->type->getLabel()} sebesar Rp" . number_format($record->amount, 0, ',', '.') . "?")
-                    ->action(function (Fine $record) {
-                        $record->update([
-                            'status' => FineStatus::Paid,
-                            'paid_at' => now(),
-                            'paid_by' => Auth::id(),
-                        ]);
-                        Notification::make()
-                            ->success()
-                            ->title('Denda berhasil dibayar')
-                            ->send();
-                    }),
+                self::payFineAction(),
             ])
-            ->defaultSort('crated_at', 'desc');
+            ->defaultSort('created_at', 'desc');
+    }
+
+    public static function payFineAction()
+    {
+        return Action::make('pay')
+            ->label('Bayar')
+            ->icon('heroicon-o-check-circle')
+            ->color('success')
+            ->visible(fn(Fine $record) => $record->status === FineStatus::Unpaid)
+            ->requiresConfirmation()
+            ->modalHeading('Konfirmasi Pembayaran')
+            ->modalDescription(fn(Fine $record) => "Konfirmasi pembayaran denda {$record->type->getLabel()} sebesar Rp" . number_format($record->amount, 0, ',', '.') . "?")
+            ->action(function (Fine $record) {
+                self::processPayment($record);
+            });
+    }
+
+    protected static function processPayment(Fine $record)
+    {
+        $record->update([
+            'status' => FineStatus::Paid,
+            'paid_at' => now(),
+            'paid_by' => Auth::id()
+        ]);
+
+        Notification::make()
+            ->success()
+            ->title('Denda berhasil dibayar')
+            ->send();
     }
 }

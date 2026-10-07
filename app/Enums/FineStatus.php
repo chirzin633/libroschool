@@ -2,12 +2,17 @@
 
 namespace App\Enums;
 
-enum FineStatus: string
+use Filament\Support\Contracts\HasLabel;
+use Illuminate\Contracts\Support\Htmlable;
+use Override;
+
+enum FineStatus: string implements HasLabel
 {
   case Unpaid = 'Unpaid';
   case Paid = 'Paid';
 
-  public function label()
+  #[Override]
+  public function getLabel(): string|Htmlable|null
   {
     return match ($this) {
       self::Unpaid => 'Belum Lunas',

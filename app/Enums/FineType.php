@@ -2,13 +2,18 @@
 
 namespace App\Enums;
 
-enum FineType: string
+use Filament\Support\Contracts\HasLabel;
+use Illuminate\Contracts\Support\Htmlable;
+use Override;
+
+enum FineType: string implements HasLabel
 {
   case Late = 'Late';
   case Damaged = 'Damaged';
   case Lost = 'Lost';
 
-  public function label()
+  #[Override]
+  public function getLabel(): string|Htmlable|null
   {
     return match ($this) {
       self::Late => 'Keterlambatan',

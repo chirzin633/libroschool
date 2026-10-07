@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Fines\Pages;
 
 use App\Filament\Resources\Fines\FineResource;
-use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewFine extends ViewRecord
@@ -12,8 +11,6 @@ class ViewFine extends ViewRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            EditAction::make(),
-        ];
+        return [];
     }
 }
