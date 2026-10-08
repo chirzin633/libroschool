@@ -12,7 +12,7 @@ use Override;
 
 class PaidFinesWidget extends StatsOverviewWidget
 {
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 3;
 
     #[Override]
     public static function canView(): bool
