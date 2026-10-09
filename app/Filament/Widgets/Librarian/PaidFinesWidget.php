@@ -12,7 +12,7 @@ use Override;
 
 class PaidFinesWidget extends StatsOverviewWidget
 {
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 4;
 
     #[Override]
     public static function canView(): bool
@@ -39,7 +39,7 @@ class PaidFinesWidget extends StatsOverviewWidget
                 ->color('success'),
 
             Stat::make('Denda Terbayar Bulan Ini', 'Rp ' . number_format($monthPaid, 0, ',', '.'))
-                ->description('Pemasukan denda bulan')
+                ->description('Pemasukan denda bulan ini')
                 ->icon('heroicon-o-calendar')
                 ->color('success')
         ];

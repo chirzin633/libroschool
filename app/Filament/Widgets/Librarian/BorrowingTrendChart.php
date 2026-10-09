@@ -11,7 +11,7 @@ use Override;
 
 class BorrowingTrendChart extends ChartWidget
 {
-    protected ?string $heading = 'Tren peminjaman (30 Hari Terakhir';
+    protected ?string $heading = 'Tren peminjaman (30 hari terakhir)';
     protected static ?int $sort = 2;
     protected ?string $maxHeight = '300px';
 
@@ -45,6 +45,15 @@ class BorrowingTrendChart extends ChartWidget
                 ],
             ],
             'labels' => $dates->map(fn($d) => Carbon::parse($d)->format('d M'))->toArray(),
+        ];
+    }
+
+    #[Override]
+    protected function getOptions(): array
+    {
+        return [
+            'responsive' => true,
+            'maintainAspectRatio' => false,
         ];
     }
 

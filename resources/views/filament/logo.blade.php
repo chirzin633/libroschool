@@ -1,10 +1,8 @@
-<div style="display: flex; align-items: center; gap: 12px; width: 100%; white-space: nowrap;">
-    <!-- Memaksa tinggi logo maks 28px -->
+<div class="flex w-full items-center gap-3 whitespace-nowrap">
     <img src="{{ asset('assets/logo_libroschool.webp') }}" alt="Logo LibroSchool"
-        style="height: 28px !important; width: auto !important; object-fit: contain;">
+        class="h-7 w-auto object-contain">
 
-    <!-- Memaksa teks nama aplikasi muncul di sebelahnya -->
-    <span style="font-weight: 700; font-size: 1.25rem; tracking: -0.025em; color: currentColor;">
+    <span class="text-xl font-bold tracking-tight text-current">
         LibroSchool
     </span>
 </div>

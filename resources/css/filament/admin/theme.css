@@ -1,0 +1,31 @@
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+@theme {
+    --color-paper: #f6f4ee;
+
+    --radius-lg: 0.625rem;
+    --radius-xl: 0.875rem;
+}
+
+@layer base {
+    .fi-body {
+        @apply bg-paper dark:bg-gray-950;
+    }
+}
+
+@layer components {
+    .fi-simple-main {
+        @apply shadow-md ring-gray-950/10 sm:rounded-2xl dark:ring-white/10;
+    }
+
+    .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+        @apply bg-primary-100/80 dark:bg-primary-500/10;
+    }
+
+    .fi-wi-chart-frame-no-aspect-ratio {
+        @apply h-56;
+    }
+}

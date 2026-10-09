@@ -13,7 +13,7 @@ class FineDistributionChart extends ChartWidget
 {
     protected ?string $heading = 'Distribusi Jenis Denda';
     protected static ?int $sort = 3;
-    protected ?string $maxHeight = '200px';
+    protected ?string $maxHeight = '300px';
 
     #[Override]
     public static function canView(): bool
@@ -42,6 +42,15 @@ class FineDistributionChart extends ChartWidget
                 ]
             ],
             'labels' => ['Keterlambatan', 'Kerusakan', 'Kehilangan']
+        ];
+    }
+
+    #[Override]
+    protected function getOptions(): array
+    {
+        return [
+            'responsive' => true,
+            'maintainAspectRatio' => false,
         ];
     }
 

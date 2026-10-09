@@ -13,7 +13,7 @@ use Override;
 
 class LibrarianActivityWidget extends StatsOverviewWidget
 {
-    protected static ?int $sort = 4;
+    protected static ?int $sort = 5;
 
     #[Override]
     public static function canView(): bool
@@ -30,7 +30,7 @@ class LibrarianActivityWidget extends StatsOverviewWidget
 
         return [
             Stat::make('Buku Sedang Dipinjam', $borrowedCount)
-                ->description('Eksamplar yang sedang dipinjam')
+                ->description('Eksemplar yang sedang dipinjam')
                 ->icon('heroicon-o-arrow-right-circle')
                 ->color('warning'),
 

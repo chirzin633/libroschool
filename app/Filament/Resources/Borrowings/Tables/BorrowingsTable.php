@@ -64,7 +64,7 @@ class BorrowingsTable
                     ->options(BorrowingStatus::class)
             ])
             ->recordActions([
-                ViewAction::make(),
+                // ViewAction::make(),
 
                 Action::make('processReturn')
                     ->label('Proses Pengembalian')

@@ -34,12 +34,12 @@ class LibrarianOverviewWidget extends StatsOverviewWidget
             Stat::make('Total Judul Buku', Book::count())
                 ->description('Judul unik dalam katalog')
                 ->icon('heroicon-o-book-open')
-                ->color('info'),
+                ->color('primary'),
 
             Stat::make('Total Stok Fisik', Book::sum('stock'))
                 ->description('Seluruh eksemplar buku')
                 ->icon('heroicon-o-archive-box')
-                ->color('info')
+                ->color('primary')
         ];
     }
 }
